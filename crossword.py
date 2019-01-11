@@ -1,9 +1,7 @@
-import time
-
 search_type = int(input(
     "search type - [   1: known (\".\" for unknown char);    2: containing only input letters   ]: "))
 dictionary = set(word.strip().upper()
-                 for word in open('/usr/share/dict/words').readlines())
+                 for word in open('american-english').readlines())
 
 if search_type == 1:
     known = list(str.upper(input("[known]: ")))

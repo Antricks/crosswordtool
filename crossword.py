@@ -53,3 +53,5 @@ elif search_type == 2:
                     print(output)
                 elif not once and 2 < len(output):
                     print(output)
+else:
+    print("Please enter a valid option.")

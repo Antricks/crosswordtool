@@ -1,10 +1,20 @@
-search_type = int(input(
+import sys
+
+
+def fixed_input(str_inp):
+    if sys.version_info < (3, 0):
+        return raw_input(str_inp)
+    else:
+        return input(str_inp)
+
+
+search_type = int(fixed_input(
     "search type - [   1: known (\".\" for unknown char);    2: containing only input letters   ]: "))
 dictionary = set(word.strip().upper()
                  for word in open('dict').readlines())
 
 if search_type == 1:
-    known = list(str.upper(input("[known]: ")))
+    known = list(fixed_input("[known]: ").upper())
     for word in dictionary:
         output = ""
         count = 0
@@ -19,13 +29,14 @@ if search_type == 1:
                     if len(output) > 2:
                         print(output)
 elif search_type == 2:
-    letters = list(str.upper(input("[letters]: ")))
-    once = input("do you want to have characters used multiple times?(y/n) : ")
+    letters = list(fixed_input("[letters]: ").upper())
+    once = fixed_input(
+        "do you want to have characters used multiple times?(y/n) : ")
     once = str.lower(once[0]) == "n"
     for word in dictionary:
         output = ""
         count = 0
-        letters_tmp = letters.copy()
+        letters_tmp = list(letters)
         for i in range(len(word)):
             if not(word[i] in letters_tmp):
                 break

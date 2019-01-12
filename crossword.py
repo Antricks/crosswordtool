@@ -1,5 +1,8 @@
 import sys
 
+if sys.version_info < (3, 0):
+    print("This will still work with python2.x but using python3.x is recommendet.")
+
 
 def fixed_input(str_inp):
     if sys.version_info < (3, 0):
@@ -9,7 +12,7 @@ def fixed_input(str_inp):
 
 
 search_type = int(fixed_input(
-    "search type - [   1: known (\".\" for unknown char);    2: containing only input letters   ]: "))
+    "search type - [   1: known (\".\" for unknown char);    2: containing only input characters   ]: "))
 dictionary = set(word.strip().upper()
                  for word in open('dict').readlines())
 

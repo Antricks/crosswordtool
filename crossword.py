@@ -10,11 +10,12 @@ def fixed_input(str_inp):
     else:
         return input(str_inp)
 
+    
+dictionary = set(word.strip().upper()
+                 for word in open('dict').readlines())
 
 search_type = int(fixed_input(
     "search type - [   1: known (\".\" for unknown char);    2: containing only input characters   ]: "))
-dictionary = set(word.strip().upper()
-                 for word in open('dict').readlines())
 
 if search_type == 1:
     known = list(fixed_input("[known]: ").upper())

@@ -19,7 +19,7 @@ search_type_input = version_independant_input("search types: \n 1: known (\".\" 
 search_type = int(search_type_input) if search_type_input.isdigit()
 
 if search_type == 1:
-    known = list(fixed_input("[known]: ").upper())
+    known = list(version_independant_input("[known]: ").upper())
     for word in dictionary:
         output = ""
         count = 0
@@ -35,9 +35,9 @@ if search_type == 1:
                         print(output)
                         
 elif search_type == 2:
-    letters = list(fixed_input("[letters]: ").upper())
+    letters = list(version_independant_input("[letters]: ").upper())
     
-    once_input = fixed_input("Do you want characters to appear multiple times? (y/n) \n > ")
+    once_input = version_independant_input("Do you want characters to appear multiple times? (y/n) \n > ")
     once = str.lower(once_input[0]) == "n"
     
     for word in dictionary:

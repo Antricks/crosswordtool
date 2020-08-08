@@ -1,21 +1,22 @@
 import sys
 
 if sys.version_info < (3, 0):
-    print("This will still work with python2.x but using python3.x is recommendet.")
+    print("This will still work with Python 2.x but using Python 3.x is recommended.")
+    print("By the way - Python 2 is not supported any more.")
 
-
-def fixed_input(str_inp):
+    
+def version_independant_input(str_inp):
     if sys.version_info < (3, 0):
         return raw_input(str_inp)
     else:
         return input(str_inp)
 
     
-dictionary = set(word.strip().upper()
-                 for word in open('dict').readlines())
+dictionary = set(word.strip().upper() for word in open('dict').readlines())
 
-search_type = int(fixed_input(
-    "search type - [   1: known (\".\" for unknown char);    2: containing only input characters   ]: "))
+search_type_input = version_independant_input("search types: \n 1: known (\".\" for unknown char) \n 2: containing only specific characters \n > ")
+
+search_type = int(search_type_input) if search_type_input.isdigit()
 
 if search_type == 1:
     known = list(fixed_input("[known]: ").upper())
@@ -32,15 +33,18 @@ if search_type == 1:
                 if len(output) == len(word) or count == len(word) or output == word:
                     if len(output) > 2:
                         print(output)
+                        
 elif search_type == 2:
     letters = list(fixed_input("[letters]: ").upper())
-    once = fixed_input(
-        "do you want to have characters used multiple times?(y/n) : ")
-    once = str.lower(once[0]) == "n"
+    
+    once_input = fixed_input("Do you want characters to appear multiple times? (y/n) \n > ")
+    once = str.lower(once_input[0]) == "n"
+    
     for word in dictionary:
         output = ""
         count = 0
         letters_tmp = list(letters)
+    
         for i in range(len(word)):
             if not(word[i] in letters_tmp):
                 break
@@ -54,5 +58,6 @@ elif search_type == 2:
                     print(output)
                 elif not once and 2 < len(output):
                     print(output)
+
 else:
     print("Please enter a valid option.")
